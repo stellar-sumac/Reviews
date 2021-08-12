@@ -49,7 +49,6 @@ CREATE TABLE Reviews (
   -- reviewerid INTEGER NULL DEFAULT NULL,
 
   PRIMARY KEY (id)
-  -- FOREIGN KEY (reviewerid) REFERENCES reviewer(id)
 
 );
 
@@ -64,6 +63,26 @@ CREATE TABLE Photos (
 );
 
 
+CREATE TABLE Characteristics (
+  id SERIAL,
+  product_id INTEGER NOT NULL DEFAULT NULL,
+  name VARCHAR NULL DEFAULT NULL,
+  PRIMARY KEY (id)
+  -- FOREIGN KEY (product_id) REFERENCES reviewer(id)
+
+);
+
+
+CREATE TABLE Characteristicsreviews (
+  id SERIAL,
+  characteristic_id INTEGER NOT NULL DEFAULT NULL,
+  review_id INTEGER NOT NULL DEFAULT NULL,
+  value INTEGER NOT NULL DEFAULT NULL,
+  PRIMARY KEY (id)
+  -- FOREIGN KEY (product_id) REFERENCES reviewer(id)
+
+);
+
   -- FOREIGN KEY (review_id) REFERENCES Reviews(id)
 
 COPY reviews(id, product_id, rating, date, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
@@ -77,9 +96,29 @@ FROM '/home/radicaldreamer/Desktop/reviews_photos.csv'
 DELIMITER ','
 CSV HEADER;
 
+COPY characteristics(id, product_id, name)
+FROM '/home/radicaldreamer/Desktop/characteristics.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY Characteristicsreviews(id, characteristic_id, review_id, value)
+FROM '/home/radicaldreamer/Desktop/characteristic_reviews.csv'
+DELIMITER ','
+CSV HEADER;
+
 
 ALTER TABLE Photos
 ADD CONSTRAINT photos_constraint
+FOREIGN KEY (review_id)
+REFERENCES Reviews(id);
+
+ALTER TABLE Characteristicsreviews
+ADD CONSTRAINT characteristicconstraint
+FOREIGN KEY (characteristic_id)
+REFERENCES Characteristics(id);
+
+ALTER TABLE Characteristicsreviews
+ADD CONSTRAINT reviewconstraint
 FOREIGN KEY (review_id)
 REFERENCES Reviews(id);
 
