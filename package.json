@@ -1,0 +1,25 @@
+{
+  "name": "stellar",
+  "version": "1.0.0",
+  "description": "For the reviews portion of this project",
+  "main": "mongoose.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rundle": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stellar-sumac/Reviews.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stellar-sumac/Reviews/issues"
+  },
+  "homepage": "https://github.com/stellar-sumac/Reviews#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "pg": "^8.7.1"
+  }
+}
